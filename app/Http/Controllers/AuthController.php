@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
 
-   public function register(Request $request)
+    public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required','string','max:255'],
-            'email' => ['required','email','unique:users'],
-            'password' => ['required','string','min:6'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:6'],
         ]);
 
         $user = User::create([
@@ -24,18 +24,18 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        return response()->json(['message'=>'User registered','user'=>$user], 201);
+        return response()->json(['message' => 'User registered', 'user' => $user], 201);
     }
 
     public function login(Request $request)
     {
         $cred = $request->validate([
-            'email' => ['required','email'],
-            'password' => ['required','string'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
         ]);
 
         if (!$token = Auth::guard('api')->attempt($cred)) {
-            return response()->json(['message'=>'Invalid credentials'], 401);
+            return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -64,5 +64,11 @@ class AuthController extends Controller
             'token_type'   => 'bearer',
             'expires_in'   => Auth::guard('api')->factory()->getTTL() * 60,
         ]);
+    }
+
+    public function users()
+    {
+        $users = User::all();
+        return response()->json($users);
     }
 }
