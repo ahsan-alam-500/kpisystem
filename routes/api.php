@@ -18,10 +18,10 @@ Route::get('/cc', function() {
 });
 
 // Auth
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
-Route::post('refresh', [AuthController::class, 'refresh']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/refresh', [AuthController::class, 'refresh']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
 // Public meta (optional)
 Route::get('/health', fn() => response()->json(['ok' => true]));
