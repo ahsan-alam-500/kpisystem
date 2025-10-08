@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\TimeframeController;
 use Illuminate\Support\Facades\Artisan;
 
 //clear all cache
-Route::get('/cc', function() {
+Route::get('cc', function() {
     Artisan::call('cache:clear');
     Artisan::call('optimize');
     return "Cache is cleared";
