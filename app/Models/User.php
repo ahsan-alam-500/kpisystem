@@ -2,31 +2,20 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-=======
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Permission\Traits\HasRoles;
->>>>>>> 13c85d6 (final)
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
-<<<<<<< HEAD
         'name',
         'email',
         'password',
         'role'
-=======
-        'name','email','password','pub_id'
->>>>>>> 13c85d6 (final)
     ];
 
     protected $hidden = ['password','remember_token'];
@@ -35,7 +24,6 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
     /**
      * The attributes that should be cast.
      *
@@ -64,12 +52,6 @@ class User extends Authenticatable implements JWTSubject
             'email' => $this->email,
             'role' => $this->role
         ];
-=======
-    // Relations
-    public function pub()
-    {
-        return $this->belongsTo(Pub::class);
->>>>>>> 13c85d6 (final)
     }
 
     public function managedPubs()
