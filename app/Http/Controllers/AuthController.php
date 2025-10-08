@@ -62,20 +62,47 @@ class AuthController extends Controller
     /** GET /api/me */
     public function me(Request $request)
     {
-        $user = $request->user('api')->load([
+        $authUser = $request->user('api');
+        if (!$authUser) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
+        // Eager-load relations (won’t error if null)
+        $user = $authUser->loadMissing([
             'pub:id,name,pub_number',
             'managedPubs:id,name,pub_number,manager_id',
         ]);
 
-        // attach roles for frontend UI gating
-        $roles = $user->getRoleNames();
+        // Spatie roles & permissions
+        $roles = $user->getRoleNames()->values(); // ["Admin", ...]
+        $perms = $user->getAllPermissions()->pluck('name')->values(); // ["pub.create", "kpi.import", ...]
+
+        // Consistent, frontend-friendly shape
         return response()->json([
-            'user'  => $user->only(['id','name','email','phone','pub_id']),
-            'roles' => $roles,
-            'pub'   => $user->pub,
-            'managed_pubs' => $user->managedPubs,
+            'user' => [
+                'id'      => $user->id,
+                'name'    => $user->name,
+                'email'   => $user->email,
+                'phone'   => $user->phone ?? null,
+                'pub_id'  => $user->pub_id,
+                'pub'     => $user->pub ? [
+                    'id'         => $user->pub->id,
+                    'name'       => $user->pub->name,
+                    'pub_number' => $user->pub->pub_number,
+                ] : null,
+                'managed_pubs' => $user->managedPubs->map(function ($p) {
+                    return [
+                        'id'         => $p->id,
+                        'name'       => $p->name,
+                        'pub_number' => $p->pub_number,
+                    ];
+                })->values(),
+            ],
+            'roles'       => $roles,   // e.g. ["Admin"]
+            'permissions' => $perms,   // optional, useful for fine-grained UI gating
         ]);
     }
+
 
     /** POST /api/auth/logout */
     public function logout()
