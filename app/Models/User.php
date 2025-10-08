@@ -2,37 +2,40 @@
 
 namespace App\Models;
 
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+=======
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
+>>>>>>> 13c85d6 (final)
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
+<<<<<<< HEAD
         'name',
         'email',
         'password',
         'role'
+=======
+        'name','email','password','pub_id'
+>>>>>>> 13c85d6 (final)
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
+    protected $hidden = ['password','remember_token'];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
     /**
      * The attributes that should be cast.
      *
@@ -61,5 +64,25 @@ class User extends Authenticatable implements JWTSubject
             'email' => $this->email,
             'role' => $this->role
         ];
+=======
+    // Relations
+    public function pub()
+    {
+        return $this->belongsTo(Pub::class);
+>>>>>>> 13c85d6 (final)
     }
+
+    public function managedPubs()
+    {
+        return $this->hasMany(Pub::class, 'manager_id');
+    }
+
+    public function shiftCompliances()
+    {
+        return $this->hasMany(ShiftCompliance::class);
+    }
+
+    // Scopes
+    public function scopeManagers($q){ return $q->role('Manager'); }
+    public function scopeEmployees($q){ return $q->role('Employee'); }
 }

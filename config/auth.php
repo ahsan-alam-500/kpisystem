@@ -41,9 +41,15 @@ return [
             'provider' => 'users',
         ],
         'api' => [
+<<<<<<< HEAD
             'driver' => 'jwt',
             'provider' => 'users',
         ],
+=======
+        'driver' => 'jwt',
+        'provider' => 'users',
+    ],
+>>>>>>> 13c85d6 (final)
     ],
 
     /*
