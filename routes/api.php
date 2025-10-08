@@ -8,6 +8,14 @@ use App\Http\Controllers\Api\KpiImportController;
 use App\Http\Controllers\Api\ShiftComplianceController;
 use App\Http\Controllers\Api\CompareController;
 use App\Http\Controllers\Api\TimeframeController;
+use Illuminate\Support\Facades\Artisan;
+
+//clear all cache
+Route::get('/cc', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('optimize');
+    return "Cache is cleared";
+});
 
 // Auth
 Route::post('login', [AuthController::class, 'login']);
