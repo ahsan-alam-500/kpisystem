@@ -2,29 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-<<<<<<< HEAD
 use App\Http\Controllers\Api\ExcelImportApiController;
-
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
-
-Route::middleware('auth:api')->group(function () {
-    Route::get('/me', [AuthController::class, 'me']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-
-    Route::get('/users', [AuthController::class, 'users']);
-
-    // Protected Excel imports
-    Route::post('/import/kpi', [ExcelImportApiController::class, 'importKpi']);
-    Route::post('/import/compliance', [ExcelImportApiController::class, 'importCompliance']);
-=======
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\PubController;
 use App\Http\Controllers\Api\KpiImportController;
+use App\Http\Controllers\Api\TimeframeController;
 use App\Http\Controllers\Api\ShiftComplianceController;
 use App\Http\Controllers\Api\CompareController;
-use App\Http\Controllers\Api\TimeframeController;
+use App\Http\Controllers\ProfileController;
 
 // Auth
 Route::post('/auth/login', [AuthController::class, 'login']);
@@ -61,5 +45,4 @@ Route::middleware('auth:api')->group(function () {
     // time frames helper (periods & weeks)
     Route::get('/periods', [TimeframeController::class, 'periods']);
     Route::get('/periods/{period}/weeks', [TimeframeController::class, 'weeks']);
->>>>>>> 13c85d6 (final)
 });
