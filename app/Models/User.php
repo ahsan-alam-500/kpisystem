@@ -15,8 +15,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'role'
+        'password'
     ];
 
     protected $hidden = ['password','remember_token'];
@@ -50,8 +49,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'name' => $this->name,
-            'email' => $this->email,
-            'role' => $this->role
+            'email' => $this->email
         ];
     }
 
