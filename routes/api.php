@@ -10,9 +10,9 @@ use App\Http\Controllers\Api\CompareController;
 use App\Http\Controllers\Api\TimeframeController;
 
 // Auth
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/refresh', [AuthController::class, 'refresh']);
-Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:api');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('refresh', [AuthController::class, 'refresh']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
 // Public meta (optional)
 Route::get('/health', fn() => response()->json(['ok' => true]));
