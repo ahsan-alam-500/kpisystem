@@ -17,7 +17,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'name'     => ['required','string','max:255'],
             'email'    => ['required','email', Rule::unique('users','email')],
-            'password' => ['required','string','min:8','confirmed'], // expect password + password_confirmation
+            'password' => ['required','string','min:8'], // expect password + password_confirmation
             'phone'    => ['nullable','string','max:30'],
             'pub_id'   => ['nullable','exists:pubs,id'],
             'role'     => ['nullable','string','in:Admin,Manager,Employee'], // optional
