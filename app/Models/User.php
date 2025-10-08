@@ -44,9 +44,9 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /* ========== RELATIONSHIPS ========== */
-    public function pub()                     // ✅ needed for ->load('pub')
+    public function pub()
     {
-        return $this->belongsTo(Pub::class);  // users.pub_id -> pubs.id
+        return $this->belongsTo(Pub::class);
     }
 
     public function managedPubs()
