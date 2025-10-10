@@ -94,7 +94,7 @@ Route::middleware('auth:api')->group(function () {
 
                 $pub = Pub::firstOrCreate(['pub_number' => $pubNo], ['name' => "Pub $pubNo"]);
 
-                // ✅ id mass-assign না করে সেফলি Period তৈরি/খোঁজা
+                // mass-assign not to be used instead of safe find/create
                 $period = Period::find($periodNo);
                 if (!$period) {
                     $period = new Period();
