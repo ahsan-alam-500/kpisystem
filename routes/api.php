@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\KpiImportController;
 use App\Http\Controllers\Api\ShiftComplianceController;
 use App\Http\Controllers\Api\CompareController;
 use App\Http\Controllers\Api\TimeframeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
 //clear all cache
@@ -40,7 +41,10 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/pubs/{pub}', [PubController::class, 'destroy'])->middleware('role:Admin');
 
     // KPI import (csv/xlsx)
-    Route::post('/kpi/import', [KpiImportController::class, 'store']);
+    // Route::post('/kpi/import', [KpiImportController::class, 'store']);
+    Route::post('/kpi/import', function(Request $request){
+        return response()->json($request->all());
+    });
 
     // shift compliance (pub-week)
     Route::get('/shift', [ShiftComplianceController::class, 'index']); // query by pub_id, week_id
