@@ -14,7 +14,9 @@ class KpiImportController extends Controller
 {
     public function store(Request $request)
     {
-        // ✅ txt বাদ দিলাম; xls যুক্ত করলাম
+
+        return response()->json($request->all());
+
         $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
 
         try {
