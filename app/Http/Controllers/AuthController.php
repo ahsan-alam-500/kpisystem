@@ -58,12 +58,20 @@ class AuthController extends Controller
             'password' => ['required','string'],
         ]);
 
+        $user = User::where('email', $cred['email'])->first();
         // Optional: throttle brute force (requires throttle middleware on route too)
         if (!$token = Auth::guard('api')->attempt($cred)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return response()->json(
+            [
+                'name'=>$user->name,
+                'email'=>$user->email,
+                'role'=>$user->role,
+                'id'=>$user->id,
+                'token'=>$token
+            ]);
     }
 
     /** GET /api/me */
