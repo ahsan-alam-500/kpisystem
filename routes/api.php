@@ -51,12 +51,9 @@ Route::middleware('auth:api')->group(function () {
     // Route::post('/kpi/import', [KpiImportController::class, 'store']);
 
     Route::post('/kpi/import', function(Request $request){
-        //  $hello = $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
+         $hello = $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
 
-        Log::info("dhuke nai hala");
-        return response()->json($request->all());
-
-
+            return response()->json($hello);
         // try {
         //     // ✅ Excel থেকে কালেকশন নেয়ার সঠিক উপায় (null দেবেন না)
         //     $import = new RowsImport();
