@@ -56,6 +56,8 @@ Route::middleware('auth:api')->group(function () {
 
         return response()->json($request->all());
 
+        Log::info('message:'.$request->all());
+
         // try {
         //     // ✅ Excel থেকে কালেকশন নেয়ার সঠিক উপায় (null দেবেন না)
         //     $import = new RowsImport();
