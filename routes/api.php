@@ -51,10 +51,9 @@ Route::middleware('auth:api')->group(function () {
     // Route::post('/kpi/import', [KpiImportController::class, 'store']);
 
     Route::post('/kpi/import', function(Request $request){
-         Log::info("\n\n"."rows paisi dhukse");
         //  $hello = $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
 
-        Log::info('message: '.$request->all());
+        Log::info($request->all());
         return response()->json($request->all());
 
 
