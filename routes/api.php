@@ -52,9 +52,9 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/kpi/import', function(Request $request){
          Log::info("\n\n"."rows paisi dhukse");
-         $hello = $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
+        //  $hello = $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
 
-        return response()->json($hello);
+        return response()->json($request->all());
 
         // try {
         //     // ✅ Excel থেকে কালেকশন নেয়ার সঠিক উপায় (null দেবেন না)
