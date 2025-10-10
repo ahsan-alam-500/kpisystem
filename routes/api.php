@@ -72,6 +72,8 @@ Route::middleware('auth:api')->group(function () {
                 'value'      => $header->search('value'),
             ];
 
+            \Log::info($map);
+
             if (in_array(false, $map, true)) {
                 return response()->json([
                     'message' => 'Expected headers: pub_number, period, kpi_code, value'
