@@ -58,7 +58,7 @@ Route::middleware('auth:api')->group(function () {
             $import = new RowsImport();
             Excel::import($import, $request->file('file'));
 
-            $rows = $import->rows->first(); // প্রথম শিট
+            $rows = $import->rows->first();
             Log::info($rows."\n\n"."rows paisi");
             if (!$rows || $rows->count() < 2) {
                 return response()->json(['message' => 'No data rows found'], 422);
