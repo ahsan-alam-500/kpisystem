@@ -15,6 +15,7 @@ use App\Models\Period;
 use App\Models\Pub;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 //clear all cache
@@ -58,7 +59,7 @@ Route::middleware('auth:api')->group(function () {
             Excel::import($import, $request->file('file'));
 
             $rows = $import->rows->first(); // প্রথম শিট
-
+            Log::info($rows."\n\n"."rows paisi");
             if (!$rows || $rows->count() < 2) {
                 return response()->json(['message' => 'No data rows found'], 422);
             }
@@ -72,7 +73,7 @@ Route::middleware('auth:api')->group(function () {
                 'value'      => $header->search('value'),
             ];
 
-            \Log::info($map);
+            Log::info($map."\n\n"."map paisi");
 
             if (in_array(false, $map, true)) {
                 return response()->json([
