@@ -53,7 +53,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/kpi/import', function(Request $request){
         //  $hello = $request->validate(['file' => 'required|file|mimes:csv,xlsx,xls']);
 
-        Log::info("dhuke nai hala"));
+        Log::info("dhuke nai hala");
         return response()->json($request->all());
 
 
