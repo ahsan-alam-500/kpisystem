@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -29,6 +30,12 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
             'phone'    => $data['phone'] ?? null,
             'pub_id'   => $data['pub_id'] ?? null,
+        ]);
+
+        Manager::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
         if (!empty($data['role'])) {
