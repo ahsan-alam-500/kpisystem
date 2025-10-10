@@ -40,7 +40,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/pubs/{pub}', [PubController::class, 'destroy'])->middleware('role:Admin');
 
     // KPI import (csv/xlsx)
-    Route::post('/kpi/import', [KpiImportController::class, 'store'])->middleware('role:Admin|Manager');
+    Route::post('/kpi/import', [KpiImportController::class, 'store']);
 
     // shift compliance (pub-week)
     Route::get('/shift', [ShiftComplianceController::class, 'index']); // query by pub_id, week_id
